@@ -1,8 +1,10 @@
 from flask import Flask, render_template,request,redirect,url_for # For flask implementation
+import os
+'''
 from pymongo import MongoClient # Database connector
 from bson.objectid import ObjectId # For ObjectId to work
 import feedparser
-import os
+'''
 
 app = Flask(__name__)
 
