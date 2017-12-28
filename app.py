@@ -1,6 +1,6 @@
 from flask import Flask, render_template,request,redirect,url_for # For flask implementation
+from flask_sendgrid import SendGrid
 import os
-import sendgrid
 
 '''
 from pymongo import MongoClient # Database connector
@@ -18,6 +18,10 @@ coll = db.coll #Select the collection
 sendgrid_username = "app84049026@heroku.com"
 sendgrid_password = "1211333s"
 
+app.config['SENDGRID_API_KEY'] = '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'
+app.config['SENDGRID_DEFAULT_FROM'] = 'info@kcabo.co.jp'
+mail = SendGrid(app)
+
 
 
 @app.route('/')
@@ -28,16 +32,12 @@ def index():
 def contact():
     email = request.values.get('email')
     content = request.values.get('content')
-    sg = sendgrid.SendGridClient(sendgrid_username, sendgrid_password)
-    message = sendgrid.Mail()
-    message.add_to(email)
-    message.set_subject("sendgrid_title")
-    message.set_text(content)
-    message.set_from('Kcabo inc.<info@kcabo.co.jp>')
-    status,msg = sg.send(message)
-
-
-
+    mail.send_email(
+        from_email = 'info@@kcabo.co.jp',
+        to_email = 'info@kcab.co.jp',
+        subject = 'Subject',
+        text = email+content
+    )
 
     return redirect('/')
 
