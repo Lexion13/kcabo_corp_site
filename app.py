@@ -1,5 +1,4 @@
 from flask import Flask, render_template,request,redirect,url_for # For flask implementation
-from flask_sendgrid import SendGrid
 import os
 
 '''
@@ -16,8 +15,6 @@ db = client.kcabo    #Select the database
 coll = db.coll #Select the collection
 '''
 
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -26,7 +23,6 @@ def index():
 def contact():
     email = request.values.get('email')
     content = request.values.get('content')
-
     return redirect('/')
 
 if __name__ == "__main__":
